@@ -3,18 +3,13 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
-  "scripts": {
-    "build": "tsc",
-    "build:all": "tsc && typedoc",
-    "build:docs": "typedoc",
-    "build:tsc": "tsc",
-    "watch": "tsc -w",
-    "start": "nodemon dist/server.js",
-    "dev:server": "ts-node-dev --respawn --transpile-only --ignore node_modules src/server.ts",
-    "pretest": "NODE_ENV=test sequelize db:migrate && NODE_ENV=test sequelize db:seed:all",
-    "test": "NODE_ENV=test jest",
-    "posttest": "NODE_ENV=test sequelize db:migrate:undo:all"
-  },
+"scripts": {
+  "install:backend": "npm install --prefix backend",
+  "install:frontend": "npm install --prefix frontend",
+  "postinstall": "npm run install:backend && npm run install:frontend",
+  "build": "npm run build --prefix frontend",
+  "start": "npm run build && cd backend && npm start"
+ },
   "author": "",
   "license": "MIT",
   "dependencies": {
@@ -86,6 +81,6 @@
     "supertest": "^5.0.0",
     "ts-jest": "^26.4.1",
     "ts-node-dev": "^1.0.0-pre.63",
-    "typescript": "4.0.3"
+    "typescript": "^4.0.3"
   }
 }
